@@ -1,0 +1,13 @@
+/* Registration.css */
+
+.registration-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .registration-form {
+    width: 300px; /* Adjust the width as needed */
+  }
+  

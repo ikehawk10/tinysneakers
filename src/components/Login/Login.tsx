@@ -9,6 +9,7 @@ const Login: React.FC = () => {
 
   const submitForm = async (event: SyntheticEvent) => {
     event.preventDefault();
+    console.log({username, password});
 
     try {
       const response = await fetch('http://localhost:3001/login', {
@@ -17,6 +18,7 @@ const Login: React.FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ username, password }),
+        credentials: 'include'
       });
 
       if (response.ok) {
