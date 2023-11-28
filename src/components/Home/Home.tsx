@@ -1,8 +1,26 @@
-// Home.tsx
-
-import React from 'react';
+import React, { useState } from 'react';
 
 const Home: React.FC = () => {
+  const [apiResponse, setApiResponse] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
+
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ inputValue }),
+    });
+    const data = await response.json();
+    setApiResponse(data.message);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,9 +58,15 @@ const Home: React.FC = () => {
 
       {/* Add your Home component content here */}
       <div>
-        <h1>Welcome to the Home Page!</h1>
-        {/* Your Home component content goes here */}
-      </div>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="Enter a value"
+          />
+          <button onClick={fetchData}>Test API Communication</button>
+          <p>API Response: {apiResponse}</p>
+        </div>
     </div>
   );
 };

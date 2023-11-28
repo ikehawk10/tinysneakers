@@ -11,13 +11,10 @@ const App: React.FC = () => {
   return (
     <Router>
       <div>
-        {/* Common components or layout can be placed here */}
         <Routes>
           <Route path="/login" element={<Login/>} />
           <Route path="/home" element={<Home/>} />
           <Route path="/registration" element={<Registration/>} />
-          {/* Add more routes as needed */}
-          {/* A catch-all route for unknown paths */}
           <Route path="/" element={<Home/>} />
         </Routes>
       </div>
