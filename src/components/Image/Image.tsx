@@ -3,13 +3,11 @@ import React from 'react';
 interface ImageProps {
   source: any;
   alt: string;
-  width: number;
-  height: number;
 }
 
-const Image: React.FC<ImageProps> = ({ source, alt, width, height }) => {
+const Image: React.FC<ImageProps> = ({ source, alt }) => {
   return (
-    <img src={source} alt={alt} width={width} height={height} />
+    <img className="img-fluid" src={source} alt={alt} />
   );
 };
 

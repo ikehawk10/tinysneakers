@@ -8,7 +8,6 @@ const AboutMe: React.FC = () => {
     <div className="row">
         <div className="col-12 col-md-6 d-flex align-items-center">
             <div className="flex-column">
-                <
                 <Image source={`${process.env.PUBLIC_URL}/images/river3.JPG`} alt="river1" />
             </div>
         </div>
