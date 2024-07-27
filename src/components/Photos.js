@@ -5,8 +5,8 @@ import { Container, Row, Col, Card, Modal, Button } from 'react-bootstrap';
 
 const Photos = () => {
   const [photos, setPhotos] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -21,26 +21,34 @@ const Photos = () => {
     fetchPhotos();
   }, []);
 
-  const handleShow = (photo) => {
-    setSelectedPhoto(photo);
+  const handleOpenModal = (index) => {
+    setCurrentIndex(index);
     setShowModal(true);
   };
 
-  const handleClose = () => {
+  const handleCloseModal = () => {
     setShowModal(false);
-    setSelectedPhoto(null);
+    setCurrentIndex(null);
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % photos.length);
+  };
+
+  const handlePrevious = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + photos.length) % photos.length);
   };
 
   return (
     <Container style={{ marginTop: '50px' }}>
       <Row>
-        {photos.map(photo => (
+        {photos.map((photo, index) => (
           <Col xs={12} md={4} lg={3} key={photo._id} className="mb-4">
             <Card>
               <Card.Img
                 variant="top"
-                src={`http://localhost:5001/${photo.url}`}
-                onClick={() => handleShow(photo)}
+                src={`http://localhost:5001/uploads/${photo.url}`}
+                onClick={() => handleOpenModal(index)}
                 style={{ cursor: 'pointer' }}
               />
               <Card.Body>
@@ -55,20 +63,23 @@ const Photos = () => {
         ))}
       </Row>
 
-      {selectedPhoto && (
-        <Modal show={showModal} onHide={handleClose} size="lg" centered>
-          <Modal.Header closeButton>
-            <Modal.Title>{selectedPhoto.title}</Modal.Title>
-          </Modal.Header>
+      {currentIndex !== null && (
+        <Modal show={showModal} onHide={handleCloseModal} size="lg" centered>
           <Modal.Body>
             <img
-              src={`http://localhost:5001/${selectedPhoto.url}`}
-              alt={selectedPhoto.title}
+              src={`http://localhost:5001/uploads/${photos[currentIndex].url}`}
+              alt={photos[currentIndex].title}
               style={{ width: '100%', height: 'auto' }}
             />
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={handlePrevious}>
+              Previous
+            </Button>
+            <Button variant="secondary" onClick={handleNext}>
+              Next
+            </Button>
+            <Button variant="primary" onClick={handleCloseModal}>
               Close
             </Button>
           </Modal.Footer>
