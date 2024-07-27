@@ -1,0 +1,39 @@
+.intro-text {
+    text-align: left;
+    margin-left: 20px;
+  }
+  
+  .intro-text h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .intro-text p {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+  }
+  
+  .intro-text .btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    .intro-text {
+      margin-left: 0;
+      text-align: center;
+    }
+  
+    img {
+      margin-bottom: 20px;
+      /* Ensure the image is not too large on smaller screens */
+      max-width: 90%;
+    }
+  }
+  

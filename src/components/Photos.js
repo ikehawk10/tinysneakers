@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Card, Modal, Button } from 'react-bootstrap';
+import './Photos.css'; // Import the CSS file
 
 const Photos = () => {
   const [photos, setPhotos] = useState([]);
@@ -64,21 +65,26 @@ const Photos = () => {
       </Row>
 
       {currentIndex !== null && (
-        <Modal show={showModal} onHide={handleCloseModal} size="lg" centered>
+        <Modal show={showModal} onHide={handleCloseModal} size="lg" centered className="custom-modal">
           <Modal.Body>
             <img
               src={`http://localhost:5001/uploads/${photos[currentIndex].url}`}
               alt={photos[currentIndex].title}
-              style={{ width: '100%', height: 'auto' }}
+              className={`modal-image ${photos[currentIndex].url.includes('.jpg') ? 'landscape' : ''}`}
             />
+            <p className="modal-description">{photos[currentIndex].description}</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handlePrevious}>
-              Previous
-            </Button>
-            <Button variant="secondary" onClick={handleNext}>
-              Next
-            </Button>
+            {photos.length > 1 && (
+              <>
+                <Button variant="secondary" onClick={handlePrevious}>
+                  Previous
+                </Button>
+                <Button variant="secondary" onClick={handleNext}>
+                  Next
+                </Button>
+              </>
+            )}
             <Button variant="primary" onClick={handleCloseModal}>
               Close
             </Button>

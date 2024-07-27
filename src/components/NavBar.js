@@ -1,11 +1,16 @@
-// src/components/NavBar.js
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import SneakerIcon from './SneakerIcon';
 
 const NavBar = () => (
-  <Navbar bg="dark" variant="dark" expand="lg">
-    <Navbar.Brand as={Link} to="/">TinySneakers</Navbar.Brand>
+  <Navbar bg="dark" variant="dark" expand="lg" style={{ padding: '20px' }}>
+    <Navbar.Brand as={Link} to="/">
+      <SneakerIcon
+        style={{ width: '30px', height: 'auto', marginRight: '10px' }} // Adjust size and spacing
+      />
+      TinySneakers
+    </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mr-auto">

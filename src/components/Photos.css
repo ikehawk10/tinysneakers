@@ -1,0 +1,51 @@
+/* src/components/Photos.css */
+.custom-modal .modal-content {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
+  }
+  
+  .modal-image {
+    max-width: 90vw; /* Limits image width to 90% of viewport width */
+    max-height: 80vh; /* Limits image height to 80% of viewport height */
+    width: auto; /* Maintains aspect ratio */
+    height: auto; /* Maintains aspect ratio */
+    margin: 0 auto; /* Centers the image horizontally */
+    display: block; /* Ensures the image is displayed as a block element */
+    border-radius: 5px; /* Optional: adds rounded corners to the image */
+  }
+  
+  /* To handle very wide images */
+  .modal-image.landscape {
+    max-width: 100%; /* Limits width to 100% of its container */
+    max-height: 80vh; /* Keeps height restricted */
+  }
+  
+  /* Description styling */
+  .modal-description {
+    color: #fff; /* White text color for description */
+    text-align: center; /* Centers the description text */
+    margin-top: 10px; /* Adds margin above the description */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 576px) {
+    .modal-image {
+      max-width: 95vw; /* On very small screens, allow a bit more width */
+      max-height: 70vh; /* Allow a bit more height */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .modal-image {
+      max-width: 90vw; /* On small screens, restrict width slightly */
+      max-height: 75vh; /* Restrict height slightly */
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .modal-image {
+      max-width: 85vw; /* On medium screens, restrict width more */
+      max-height: 80vh; /* Keep height limited */
+    }
+  }
+  
