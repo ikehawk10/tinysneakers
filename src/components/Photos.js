@@ -1,32 +1,44 @@
 // src/components/Photos.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
-// Sample photo data
-const photos = [
-  { id: 1, src: 'https://via.placeholder.com/300', alt: 'Photo 1' },
-  { id: 2, src: 'https://via.placeholder.com/300', alt: 'Photo 2' },
-  { id: 3, src: 'https://via.placeholder.com/300', alt: 'Photo 3' },
-  { id: 4, src: 'https://via.placeholder.com/300', alt: 'Photo 4' },
-  { id: 5, src: 'https://via.placeholder.com/300', alt: 'Photo 5' },
-  // Add more photo objects here
-];
+const Photos = () => {
+  const [photos, setPhotos] = useState([]);
 
-const Photos = () => (
-  <Container className="mt-5">
-    <Row>
-      {photos.map((photo) => (
-        <Col xs={12} md={4} lg={3} key={photo.id} className="mb-4">
-          <Card>
-            <Card.Img variant="top" src={photo.src} alt={photo.alt} />
-            <Card.Body>
-              <Card.Title>{photo.alt}</Card.Title>
-            </Card.Body>
-          </Card>
-        </Col>
-      ))}
-    </Row>
-  </Container>
-);
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      try {
+        const response = await axios.get('http://localhost:5001/api/photos');
+        setPhotos(response.data);
+      } catch (error) {
+        console.error('Error fetching photos:', error);
+      }
+    };
+
+    fetchPhotos();
+  }, []);
+
+  return (
+    <Container style={{ marginTop: '50px' }}>
+      <Row>
+        {photos.map(photo => (
+          <Col xs={12} md={4} lg={3} key={photo._id} className="mb-4">
+            <Card>
+              <Card.Img variant="top" src={photo.url} />
+              <Card.Body>
+                <Card.Title>{photo.title}</Card.Title>
+                <Card.Text>{photo.description}</Card.Text>
+                <Card.Text>
+                  <small className="text-muted">{new Date(photo.date).toLocaleDateString()}</small>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
+  );
+};
 
 export default Photos;
