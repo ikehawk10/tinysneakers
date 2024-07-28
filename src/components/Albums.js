@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './Albums.css'; // Import the CSS file
 
 const Albums = () => {
   const [albums, setAlbums] = useState([]);
@@ -21,21 +22,21 @@ const Albums = () => {
   }, []);
 
   return (
-    <Container style={{ marginTop: '50px' }}>
+    <Container className="albums-container">
       <h2>Albums</h2>
       <Row>
         {albums.map((album) => (
           <Col xs={12} md={6} lg={4} key={album._id} className="mb-4">
             <Link to={`/albums/${album._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <Card>
+              <Card className="album-card">
+                <Card.Body>
+                  <Card.Title className="album-card-title">{album.name}</Card.Title>
+                </Card.Body>
                 <Card.Img
-                  variant="top"
+                  variant="bottom"
                   src={`http://localhost:5001/${album.coverPhotoUrl}`}
                   alt={album.name}
                 />
-                <Card.Body>
-                  <Card.Title>{album.name}</Card.Title>
-                </Card.Body>
               </Card>
             </Link>
           </Col>

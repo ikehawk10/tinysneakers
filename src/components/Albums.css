@@ -1,0 +1,23 @@
+/* src/components/Albums.css */
+
+.albums-container {
+    margin-top: 50px;
+  }
+  
+  .album-card {
+    text-align: center;
+  }
+  
+  .album-card-title {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+  }
+  
+  .album-card img {
+    width: 100%;
+    height: 300px; /* Increase the height for a more vertical appearance */
+    object-fit: cover; /* Ensures the image covers the entire container */
+    border: 1px solid #ddd; /* Optional: Add a border for better visual separation */
+    background-color: #f8f8f8; /* Optional: Add a background color */
+  }
+  

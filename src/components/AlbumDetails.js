@@ -33,7 +33,7 @@ const AlbumDetail = () => {
         {album.photos.map((photo) => (
           <Col xs={12} md={6} lg={4} key={photo._id} className="mb-4">
             <Image
-              src={`http://localhost:5001/${photo.url}`}
+              src={`http://localhost:5001/${photo.coverPhotoUrl}`}
               alt={photo.title}
               fluid
             />
