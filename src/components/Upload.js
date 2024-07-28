@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
+import './Common.css'; // Import shared styles
 
 const Upload = () => {
   const [file, setFile] = useState(null);
@@ -46,8 +47,8 @@ const Upload = () => {
   };
 
   return (
-    <Container className="mt-5">
-      <h2 className="mb-4">Upload Photo</h2>
+    <Container className="page-container">
+      <h2 className="page-header">Upload Photo</h2>
       {success && <Alert variant="success">{success}</Alert>}
       {error && <Alert variant="danger">{error}</Alert>}
       <Form onSubmit={handleSubmit}>

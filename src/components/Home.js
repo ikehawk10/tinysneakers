@@ -10,7 +10,7 @@ const Home = () => (
         <img
           src="images/family-photo.jpeg"
           alt="Family"
-          className="img-fluid rounded-circle"
+          className="img-fluid"
         />
       </Col>
       <Col md={6}>

@@ -16,7 +16,8 @@ const NavBar = () => (
       <Nav className="mr-auto">
         <Nav.Link as={Link} to="/">Home</Nav.Link>
         <Nav.Link as={Link} to="/photos">Photos</Nav.Link>
-        <Nav.Link as={Link} to="/upload">Upload</Nav.Link>
+        <Nav.Link as={Link} to="/albums">Albums</Nav.Link>
+        <Nav.Link as={Link} to="/create-album">Create Album</Nav.Link>
       </Nav>
     </Navbar.Collapse>
   </Navbar>

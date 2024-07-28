@@ -1,10 +1,15 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Photos from './components/Photos';
-import Upload from './components/Upload';
-import NavBar from './components/NavBar';
+import CreateAlbum from './components/CreateAlbum';
+import Albums from './components/Albums';
+import AlbumDetails from './components/AlbumDetails';
+
+// Add this route
+
 
 const App = () => (
   <Router>
@@ -12,7 +17,9 @@ const App = () => (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/photos" element={<Photos />} />
-      <Route path="/upload" element={<Upload />} />
+      <Route path="/create-album" element={<CreateAlbum />} />
+      <Route path="/albums/:id" element={<AlbumDetails />} />
+      <Route path="/albums" element={<Albums />} />
     </Routes>
   </Router>
 );

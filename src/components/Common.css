@@ -1,0 +1,13 @@
+/* src/components/Common.css */
+.page-container {
+    max-width: 600px;
+    margin: 50px auto; /* Adjusts distance from the top (nav bar) */
+  }
+  
+  .page-header {
+    font-size: 2.5rem; /* Ensure both headers have the same font size */
+    margin-bottom: 20px;
+  }
+  
+  /* Other common styles can go here */
+  

@@ -1,0 +1,23 @@
+.create-album-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .create-album-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .create-album-container .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .create-album-container .form-control {
+    border-radius: 5px;
+  }
+  
+  .create-album-container .btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
