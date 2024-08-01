@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import './Common.css'; // Import shared styles
 
-const Upload = () => {
+const Upload = ({ albumId, onUploadSuccess }) => {
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -26,12 +26,12 @@ const Upload = () => {
     }
 
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append('photo', file); // Use the correct field name
     formData.append('title', title);
     formData.append('description', description);
 
     try {
-      await axios.post('http://localhost:5001/api/photos/upload', formData, {
+      await axios.post(`http://localhost:5001/api/albums/${albumId}/photos`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -40,6 +40,7 @@ const Upload = () => {
       setFile(null);
       setTitle('');
       setDescription('');
+      if (onUploadSuccess) onUploadSuccess(); // Call the callback on success
     } catch (error) {
       setError('Error uploading photo. Please try again.');
       console.error('Error uploading photo:', error);

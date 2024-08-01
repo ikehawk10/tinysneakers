@@ -1,12 +1,14 @@
-// src/components/AlbumDetail.js
+// src/components/AlbumDetails.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button, Modal } from 'react-bootstrap';
+import Upload from './Upload'; // Import the Upload component
 
-const AlbumDetail = () => {
+const AlbumDetails = () => {
   const { id } = useParams(); // Get the album ID from the URL
   const [album, setAlbum] = useState(null); // State to hold album data
+  const [showModal, setShowModal] = useState(false); // State to control modal visibility
 
   useEffect(() => {
     const fetchAlbum = async () => {
@@ -22,6 +24,19 @@ const AlbumDetail = () => {
     fetchAlbum();
   }, [id]); // Re-fetch data if the ID changes
 
+  // Function to refresh album data
+  const refreshAlbum = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5001/api/albums/${id}`);
+      setAlbum(response.data);
+    } catch (error) {
+      console.error('Error refreshing album:', error);
+    }
+  };
+
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
   // Show loading message while data is being fetched
   if (!album) return <div>Loading...</div>;
 
@@ -29,11 +44,14 @@ const AlbumDetail = () => {
     <Container style={{ marginTop: '50px' }}>
       <h2>{album.name}</h2>
       <p>{album.description}</p>
+      <Button variant="primary" onClick={handleShowModal}>
+        Upload Photo
+      </Button>
       <Row>
         {album.photos.map((photo) => (
           <Col xs={12} md={6} lg={4} key={photo._id} className="mb-4">
             <Image
-              src={`http://localhost:5001/${photo.coverPhotoUrl}`}
+              src={`http://localhost:5001/${photo.url}`}
               alt={photo.title}
               fluid
             />
@@ -41,8 +59,18 @@ const AlbumDetail = () => {
           </Col>
         ))}
       </Row>
+
+      {/* Modal for uploading photos */}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Upload Photo</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Upload albumId={id} onUploadSuccess={refreshAlbum} /> {/* Pass the callback */}
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 };
 
-export default AlbumDetail;
+export default AlbumDetails;
