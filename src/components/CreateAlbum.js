@@ -2,12 +2,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './Common.css'; // Import shared styles
 
 const CreateAlbum = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [coverPhoto, setCoverPhoto] = useState(null);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleFileChange = (e) => {
     setCoverPhoto(e.target.files[0]);
@@ -28,6 +30,7 @@ const CreateAlbum = () => {
         },
       });
       alert('Album created successfully');
+      navigate('/albums'); // Redirect to /albums on success
     } catch (error) {
       console.error('Error creating album:', error);
     }
