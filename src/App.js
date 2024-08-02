@@ -1,16 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import Register from './components/Register';
 import AlbumDetails from './components/AlbumDetails';
 import Albums from './components/Albums';
 import Login from './components/Login';
 import PrivateRoute from './components/PrivateRoute';
 
 const App = () => (
-  <AuthProvider>
-    <Router>
+  <BrowserRouter>
+    <AuthProvider>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route 
           path="/albums/:id" 
           element={
@@ -29,8 +31,9 @@ const App = () => (
         />
         <Route path="/" element={<Navigate to="/albums" />} />
       </Routes>
-    </Router>
-  </AuthProvider>
+    </AuthProvider>
+  </BrowserRouter>
+
 );
 
 export default App;
