@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.65",
-    "axios": "^1.7.2",
+    "axios": "^1.7.3",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
     "openai": "^4.20.1",

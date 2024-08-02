@@ -1,27 +1,36 @@
-// src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import Home from './components/Home';
-import Photos from './components/Photos';
-import CreateAlbum from './components/CreateAlbum';
-import Albums from './components/Albums';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import AlbumDetails from './components/AlbumDetails';
-
-// Add this route
-
+import Albums from './components/Albums';
+import Login from './components/Login';
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => (
-  <Router>
-    <NavBar />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/photos" element={<Photos />} />
-      <Route path="/create-album" element={<CreateAlbum />} />
-      <Route path="/albums/:id" element={<AlbumDetails />} />
-      <Route path="/albums" element={<Albums />} />
-    </Routes>
-  </Router>
+  <AuthProvider>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route 
+          path="/albums/:id" 
+          element={
+            <PrivateRoute>
+              <AlbumDetails />
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/albums" 
+          element={
+            <PrivateRoute>
+              <Albums />
+            </PrivateRoute>
+          } 
+        />
+        <Route path="/" element={<Navigate to="/albums" />} />
+      </Routes>
+    </Router>
+  </AuthProvider>
 );
 
 export default App;
