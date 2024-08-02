@@ -18,17 +18,6 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common['x-auth-token'] = token;
-      const fetchUser = async () => {
-        try {
-          // Adjust this endpoint if necessary
-          const response = await axios.get('http://localhost:5001/api/auth/me');
-          setUser(response.data);
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-          setUser(null); // Handle errors or invalid tokens
-        }
-      };
-      fetchUser();
     } else {
       delete axios.defaults.headers.common['x-auth-token'];
     }
