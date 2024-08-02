@@ -1,13 +1,13 @@
 // src/components/Photos.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Card, Modal, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import PhotoCarousel from './PhotoCarousel'; // Import the PhotoCarousel component
 import './Photos.css'; // Import the CSS file
 
 const Photos = () => {
   const [photos, setPhotos] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(null);
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -24,11 +24,9 @@ const Photos = () => {
 
   const handleOpenModal = (index) => {
     setCurrentIndex(index);
-    setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    setShowModal(false);
     setCurrentIndex(null);
   };
 
@@ -48,7 +46,7 @@ const Photos = () => {
             <Card>
               <Card.Img
                 variant="top"
-                src={`http://localhost:5001/uploads/${photo.url}`}
+                src={`http://localhost:5001/${photo.url}`}
                 onClick={() => handleOpenModal(index)}
                 style={{ cursor: 'pointer' }}
               />
@@ -64,33 +62,13 @@ const Photos = () => {
         ))}
       </Row>
 
-      {currentIndex !== null && (
-        <Modal show={showModal} onHide={handleCloseModal} size="lg" centered className="custom-modal">
-          <Modal.Body>
-            <img
-              src={`http://localhost:5001/uploads/${photos[currentIndex].url}`}
-              alt={photos[currentIndex].title}
-              className={`modal-image ${photos[currentIndex].url.includes('.jpg') ? 'landscape' : ''}`}
-            />
-            <p className="modal-description">{photos[currentIndex].description}</p>
-          </Modal.Body>
-          <Modal.Footer>
-            {photos.length > 1 && (
-              <>
-                <Button variant="secondary" onClick={handlePrevious}>
-                  Previous
-                </Button>
-                <Button variant="secondary" onClick={handleNext}>
-                  Next
-                </Button>
-              </>
-            )}
-            <Button variant="primary" onClick={handleCloseModal}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      )}
+      <PhotoCarousel
+        photos={photos}
+        selectedPhotoIndex={currentIndex}
+        handlePrevious={handlePrevious}
+        handleNext={handleNext}
+        handleClose={handleCloseModal}
+      />
     </Container>
   );
 };
