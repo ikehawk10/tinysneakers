@@ -18,8 +18,22 @@ const App = () => (
         <Route element={<Layout />}> {/* Use Layout component for rendering */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/photos" element={<Photos />} />
+          <Route 
+            path="/" 
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+              } 
+            />
+          <Route 
+            path="/photos" 
+            element={
+              <PrivateRoute>
+                <Photos />
+              </PrivateRoute>
+            } 
+          />
           <Route 
             path="/albums/:id" 
             element={
@@ -36,7 +50,14 @@ const App = () => (
               </PrivateRoute>
             } 
           />
-          <Route path="/create-album" element={<CreateAlbum />} />
+          <Route 
+            path="/create-album" 
+            element={
+              <PrivateRoute>
+                <CreateAlbum />
+              </PrivateRoute>
+              }  
+            />
           <Route path="*" element={<Navigate to="/" />} /> {/* Redirect unknown routes */}
         </Route>
       </Routes>
